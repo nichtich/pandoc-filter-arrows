@@ -1,0 +1,50 @@
+#!/usr/bin/env perl
+use v5.14;
+use Pandoc::Elements;
+use Pandoc::Filter;
+use utf8;
+
+my %arrows = (
+    '->'    => 'rightarrow',
+    '-->'   => 'longrightarrow',
+    '–>'    => 'longrightarrow',
+    '=>'    => 'Rightarrow',
+    '==>'   => 'Longrightarrow',
+    '<-'    => 'leftarrow',
+    '<--'   => 'longleftarrow',
+    '<–'    => 'longleftarrow',
+    '<='    => 'Leftarrow',
+    '<=='   => 'Longleftarrow',
+    '<->'   => 'leftrightarrow',
+    '<=>'   => 'Leftrightarrow',
+    '<-->'  => 'longleftrightarrow',
+    '<–>'   => 'longleftrightarrow',
+    '<==>'  => 'Longleftrightarrow',
+);
+
+$arrows{$_} = Math( InlineMath, '\\'.$arrows{$_} ) for keys %arrows;
+
+my ($pattern) = map { qr/($_)/ } join '|', 
+    sort { length $b <=> length $a } keys %arrows;
+
+pandoc_filter Str => sub {
+    my $str = $_->content;
+    return if $str !~ $pattern;
+
+    return [
+        map { $arrows{$_} // Str $_ }
+        grep { $_ ne '' }
+        split $pattern, $str
+    ];
+};
+
+=head1 NAME
+
+arrows - Replace ASCII arrows by LaTeX arrows in Pandoc
+
+=head1 DESCRIPTION
+
+This filter replaces ASCII arrows such as C<< -> >> to LaTeX
+arrows such as C<< $\rightarrow$ >>.
+
+=cut
