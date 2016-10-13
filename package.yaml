@@ -4,8 +4,12 @@ description: Replace ASCII arrows by LaTeX arrows
 license: MIT
 author: Jakob Voß <jakob.voss@gbv.de>
 version: 0.1.0 # should match a git tag in source repository
-repository: repository
 
+repository: https://github.com/nichtich/pandoc-filter-arrows.git
+keywords:
+  - arrows
+  - unicode
+  
 requires:
   - name: pandoc
     version: 1.12
@@ -14,5 +18,13 @@ requires:
     libraries: # Perl libraries => install via cpanm from CPAN
       - name: Pandoc::Elements
         version: 0.16
-filter: arrows  # which file to copy to ~/.pandoc/filters
+
+filters:   # list of filters
+  - arrows # copy or symlink this file to to ~/.pandoc/filters/arrows
+
+# may also copy the entire repository to ~/.pandoc/packages/arrows
+
+# templates: # list of templates
+# - ...
+
 ...
