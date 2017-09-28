@@ -1,7 +1,7 @@
 # pandoc-filter-arrows
 
 This repository contains a filter for [Pandoc](http://pandoc.org/) document
-conveter. The filter is written in Perl based on the Perl library
+converter. The filter is written in Perl based on the Perl library
 [Pandoc::Elements](https://metacpan.org/release/Pandoc-Elements).
 
 ## Background
