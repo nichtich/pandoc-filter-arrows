@@ -13,9 +13,8 @@ templates. See file `package.yaml` and the other files in this repository.
 
 Make sure you have Perl on your system then install the required module:
 
-  cpanm Pandoc::Elements
+    cpanm Pandoc::Elements
 
 After that copy file `arrows` from this repository to your system PATH or to
 any location to refer to it with pandoc option `-F/--filter`. It is recommended
 to copy the file in directory `~/.pandoc/filters/`.
-
